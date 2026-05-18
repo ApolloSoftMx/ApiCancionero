@@ -20,5 +20,5 @@ app.use('/api/auth',     require('./routes/auth'));
 app.use('/api/canciones', verificarToken, require('./routes/canciones'));
 app.use('/api/secciones', verificarToken, require('./routes/secciones'));
 app.use('/api/tipos',     verificarToken, require('./routes/tipos'));
-
+app.use('/api/tonalidades', verificarToken, require('./routes/tonalidades'));
 module.exports = app;
