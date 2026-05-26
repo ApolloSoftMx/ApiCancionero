@@ -13,6 +13,11 @@ app.get('/health', (req, res) => {
 
 const { verificarToken, soloAdmin } = require('./middleware/auth');
 
+// Rutas PÚBLICAS — sin token
+// app.use('/api/publico/canciones', require('./routes/publico'));
+app.use('/api/publico', require('./routes/publico'));
+
+
 // Rutas públicas
 app.use('/api/auth',     require('./routes/auth'));
 
@@ -21,4 +26,5 @@ app.use('/api/canciones', verificarToken, require('./routes/canciones'));
 app.use('/api/secciones', verificarToken, require('./routes/secciones'));
 app.use('/api/tipos',     verificarToken, require('./routes/tipos'));
 app.use('/api/tonalidades', verificarToken, require('./routes/tonalidades'));
+app.use('/api/esquemas', verificarToken, require('./routes/esquemas'));
 module.exports = app;

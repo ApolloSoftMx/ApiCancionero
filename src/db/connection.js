@@ -25,8 +25,17 @@ async function getPool() {
     if (!pool) {
         pool = await sql.connect(config);
         console.log('✅ Conectado a SQL Server');
+
+        // Ping cada 4 minutos para mantener la conexión viva
+        setInterval(async () => {
+            try {
+                await pool.request().query('SELECT 1');
+            } catch (e) {
+                console.log('Reconectando pool...');
+                pool = await sql.connect(config);
+            }
+        }, 2 * 60 * 1000);
     }
     return pool;
 }
-
 module.exports = { getPool, sql };
